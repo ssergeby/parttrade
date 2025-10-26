@@ -106,3 +106,26 @@ The History API keeps navigation in-page, while `profile.html` and `callback.htm
 2. Configure the host to serve `public/index.html` for `/`, `public/profile.html` for `/profile`, and `public/callback.html` for `/callback`.
 3. Provide production Auth0 + Pixel configuration through templating or environment-specific build steps.
 4. Test the full login → profile redirect loop and confirm pixel events in Meta diagnostics.
+
+### Deploying to Amazon S3
+
+1. Create an S3 bucket (e.g., `part.trade`). Disable *Block Public Access* if you want to host directly from the bucket and enable ACLs as needed.
+2. In the bucket properties, enable *Static website hosting* with `index.html` as the Index document. Set the Error document to `index.html` or `404.html` depending on your preference.
+3. Upload files preserving the SPA structure:
+   - `public/index.html` → upload as `index.html`.
+   - `public/profile.html` → upload as `profile/index.html` so that `/profile` resolves.
+   - `public/callback.html` → upload as `callback/index.html`.
+   - Upload `public/styles.css` and the entire `src/` directory to matching paths (e.g., `styles.css`, `src/auth.js`, etc.).
+4. Using AWS CLI from the project root:
+
+   ```bash
+   aws s3 cp spa/public s3://part.trade/ --recursive
+   aws s3 cp spa/src s3://part.trade/src/ --recursive
+   aws s3 cp spa/public/profile.html s3://part.trade/profile/index.html
+   aws s3 cp spa/public/callback.html s3://part.trade/callback/index.html
+   ```
+
+   Replace `part.trade` with your bucket name if different.
+
+5. Apply a bucket policy or object ACLs to allow public read access for the hosted files.
+6. (Optional) Front the bucket with CloudFront for HTTPS on custom domains. Point your DNS (Route53 or other provider) to the CloudFront distribution or the S3 website endpoint.
