@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PART.TRADE</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script>
+      window.AUTH0_DOMAIN = window.AUTH0_DOMAIN || 'parttrade-dev.us.auth0.com';
+      window.AUTH0_CLIENT_ID =
+        window.AUTH0_CLIENT_ID || 'd85QRkctEjdDn15nFFOCKxCCzvNMfrCP';
+      window.META_PIXEL_ID = window.META_PIXEL_ID || 'test_id';
+    </script>
+    <script
+      src="https://cdn.auth0.com/js/auth0-spa-js/2.6/auth0-spa-js.production.js"
+      defer
+    ></script>
+    <script src="../src/auth.js" defer></script>
+    <script src="../src/consent.js" defer></script>
+    <script src="../src/pixel.js" defer></script>
+    <script src="../src/main.js" defer></script>
+  </head>
+  <body data-page="home">
+    <header class="site-header">
+      <div class="brand">
+        <a href="/" data-nav="/">PART.TRADE</a>
+      </div>
+      <div class="header-actions">
+        <span id="user-name" class="user-name is-hidden"></span>
+        <img id="user-avatar" class="avatar is-hidden" alt="User avatar" />
+        <button id="auth-action" class="btn btn-primary" data-action="login">
+          Continue with Facebook
+        </button>
+      </div>
+    </header>
+    <div id="alert-bar" class="alert is-hidden"></div>
+    <main id="app" class="app-container">
+      <section class="card">
+        <h1>Loading…</h1>
+      </section>
+    </main>
+  </body>
+</html>
