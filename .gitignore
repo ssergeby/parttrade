@@ -1,0 +1,15 @@
+# Terraform artifacts
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terragrunt-cache/
+
+# Node/SPA artifacts
+node_modules/
+dist/
+build/
+
+# Environment / OS noise
+.DS_Store
+.env
